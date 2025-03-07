@@ -2,6 +2,9 @@
 
 ![](./docs/CV-preview.jpg)
 
+## 下载链接
+[![Download ZIP](https://img.shields.io/badge/Download-ZIP-blue)
+](https://github.com/sorosyhr/SYSU-CV/archive/refs/heads/main.zip)
 ## 简介
 又到了毕业季，无论是找工作、找实习，还是申请深造，一份专业的简历都必不可少。作为中山大学的学生，我在网上找了很久，却没有找到合适的中大专属简历模板。于是，我决定参考其他学校的优秀模板，自己动手做了一个——这就是 ​SYSU-CV 的由来。
 
