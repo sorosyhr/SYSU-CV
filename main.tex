@@ -1,0 +1,346 @@
+\documentclass[11pt]{article}
+%%%%可按下 Ctrl + /（Windows/Linux）或 Cmd + /（Mac）批量注释或取消注释（即在预览PDF中不显示或显示该部分）    
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{fontspec}
+\usepackage{fontawesome5}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fancybox}
+\usepackage{tabularx}
+\hypersetup{hidelinks}
+
+\setlength{\parindent}{0pt}					% 取消全局段落缩进
+\pagenumbering{gobble}						% 取消页码显示
+\setlist[itemize]{nosep                     % 取消 itemize 的默认间距
+    , before={\vspace*{-\parskip}}          % 取消 itemize 和后续段落之间的空白
+    , leftmargin=*}		                    % 取消 itemize 的左边距
+\setlist[enumerate]{leftmargin=*}	        % 取消 enumerate 的左边距
+\renewcommand{\arraystretch}{1.2}           % 设置表格行间距
+\linespread{1.25}                           % 设置正文行间距
+
+\titleformat{\section}					    % 将原标题前面的数字取消了
+  {\LARGE\bfseries\raggedright} 		      % 字体改为 LARGE，bold，左对齐
+  {}{0em}                      			  % 可用于添加全局标题前缀
+  {}                           			  % 可用于添加代码
+  [{\color{mygray}\titlerule}]               % 标题下方加一条线，使用自定义的灰色 
+\titlespacing*{\section}{0cm}{*1.2}{*1.2}	% 标题左边留白，上方，下方
+
+\usepackage[
+	a4paper,
+	left=1.2cm,
+	right=1.2cm,
+	top=1.5cm,
+	bottom=1cm,
+	nohead
+]{geometry}                                 % 页面边距设置
+
+% 字体设置
+\setmainfont[
+    Path=fonts/,
+    Extension=.otf,
+    BoldFont=*-Bold,
+]{NotoSerifSC}
+
+% 定义颜色（中大绿）
+\definecolor{SYSU_Green}{RGB}{0,102,0} 
+\definecolor{mygray}{RGB}{128,128,128} 
+\newlength{\iconwidth}
+\setlength{\iconwidth}{1.5em}                   % 设置 section 标题部分图标占用的宽度
+
+
+
+% 学院
+\newcommand{\school}{XXX学院 | School of ABC} 
+
+% 联系方式
+\newcommand{\contact}{
+    % 根据个人喜好选择字号
+    % \small                % 小
+    \footnotesize           % 更小
+    % \scriptsize           % 再小一号
+    \textcolor{white}{
+        % 邮箱
+        \faEnvelope \quad \href{mailto:youremail@mail2.sysu.edu.cn}{youremail@mail2.sysu.edu.com}
+        \hspace{4em}
+        % 手机号
+        \faPhone \quad  123-4567-8900（微信同号）
+        % 别的联系方式，如微信、GitHub等
+        \hspace{4em}
+        \faGithub \quad \href{https://github.com/////}{GitHub}
+    }
+}
+
+\begin{document}
+
+    %%%%%%%%%%%%%%%%%%%%
+    % 页眉、页脚和背景（如果有多页简历，请把页眉页脚和背景复制粘贴到第二页的内容之前）
+    %%%%%%%%%%%%%%%%%%%%
+
+    % 页眉：校标组合+学院名
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=north, inner sep=0pt](header) at (current page.north){
+            \includegraphics[width=\paperwidth]{images/header_sysu.png}
+        };
+        \node[anchor=west](school_logo) at (header.west){
+            \hspace{0.5cm}
+            \includegraphics[width=0.2\textwidth]{images/SYSU_smallwhitelogo.png}
+        };
+        \node[anchor=east](school_name) at(header.east){
+            \textcolor{white}{\textbf{\school}}
+            \hspace{0.5cm}
+        };
+    \end{tikzpicture}
+    \vspace{-3.5em}
+
+    % 页脚，联系方式
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[anchor=south, inner sep=0pt](footer) at (current page.south){
+            \includegraphics[width=\paperwidth]{images/footer_sysu.png}
+        };
+        % 联系方式
+        \node[anchor=center] at(footer.center){\contact};
+    \end{tikzpicture}
+
+    % 背景
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[opacity=0.05] at(current page.center){
+            \includegraphics[width=0.7\paperwidth, keepaspectratio]{images/SYSU_big_logo.png}
+        };
+    \end{tikzpicture}
+
+    %%%%%%%%%%%%%%%%%%%%
+    % 简历正文
+    %%%%%%%%%%%%%%%%%%%%
+
+    \begin{minipage}[t]{0.78\textwidth}
+        % 个人信息
+        \begin{minipage}[t]{\textwidth}
+        \section[个人信息]{\makebox[\iconwidth][c]{\color{SYSU_Green}{\faAddressCard}}\quad 个人信息}
+        \begin{minipage}[t]{0.5\textwidth}
+            \textbf{姓\qquad 名}：你的名字
+            
+            \vspace{0.5em}
+            \textbf{出生年月}：你的出生日期
+        \end{minipage}
+        \begin{minipage}[t]{0.35\textwidth}
+            \textbf{性\qquad 别}：random
+            
+            \vspace{0.5em}
+            \textbf{政治面貌}：你的政治面貌
+        \end{minipage}
+        \vspace{1.2em}
+        \end{minipage}
+
+        % 教育背景
+        \begin{minipage}[t]{\textwidth}
+        \section[教育背景]{\makebox[\iconwidth][c]{\color{SYSU_Green}{\faGraduationCap}}\quad 教育背景}
+        
+        {\large \textbf{中山大学}} 本科 \hfill 2022年9月--2026年6月
+        \begin{itemize}
+            \item 你的学院，你的专业
+            \item \textbf{主修课程}：课程1、课程2、课程3、课程4\ 等。
+            \item \textbf{GPA}：4.8 / 5（排名：1 / 250）%自行考虑是否写课程和GPA
+        \end{itemize}
+        
+        \vspace{0.5em}
+        {\large \textbf{中山大学}} 硕士 \hfill 2026年9月--2029年6月
+        \begin{itemize}
+            \item 你的学院，你的专业
+            \item \textbf{主修课程}：课程1、课程2、课程3、课程4\ 等。
+            \item \textbf{GPA}：4.8 / 5（排名：1 / 250）%自行考虑是否写课程和GPA
+            \item 你的学院，你的专业，你的导师姓名\ 职称             
+            \item \textbf{研究方向}：方向1、方向2、方向3、方向4\ 等。
+        \end{itemize}
+        
+        \vspace{0.5em}
+        {\large \textbf{中山大学}} 博士 \hfill 2029年9月--未知
+        \begin{itemize}
+            \item 你的学院，你的专业，你的导师姓名\ 职称
+            \item \textbf{研究方向}：方向1、方向2、方向3、方向4\ 等。
+        \end{itemize}
+        
+        \vspace{1.2em}
+        \end{minipage}
+    \end{minipage}
+    \hfill
+    % 右半边，照片，比例占行宽20%
+    \begin{minipage}[t]{0.2\textwidth}
+        \vspace{2em} % 照片上侧内容
+        \setlength{\fboxsep}{0pt}
+        \doublebox{\includegraphics[width=\linewidth]{images/avatar.png}}
+    \end{minipage}
+
+    \begin{minipage}[t]{\textwidth}
+    % 科研成果
+    \section[科研成果]{\makebox[\iconwidth][c]{\color{SYSU_Green}{\faAtom}}\quad 科研成果}
+
+    % 科研著作（研究生）
+    This is One of Your Paper Published in Conference A.
+    \begin{itemize}
+        \item \textbf{yourname}, mentorname. \hfill 发表于 \textbf{Conference A}（CCF-A类会议）
+        \item 这份论文干了什么\dots
+    \end{itemize}
+
+    \vspace{0.5em}
+    《另一份论文的标题》
+    \begin{itemize}
+        \item  \textbf{你的名字}、你的同门、你导 \hfill 发表于 \textbf{某篇期刊} （SCI-1区）
+        \item 这份论文干了什么\dots
+    \end{itemize}
+    
+    \vspace{1.2em}
+    \end{minipage}
+
+    \begin{minipage}[t]{\textwidth}
+    % 项目经历\科研经历\项目与教学（标题请根据需要修改）
+    \section[项目与教学]{\makebox[\iconwidth][c]{\color{SYSU_Green}{\faChalkboardTeacher}}\quad 项目与教学}
+    
+    {\large \textbf{项目名称}} \hfill 2020年9月--2021年9月
+    \begin{itemize}
+        \item \textbf{你在项目中扮演的角色} \hfill 横向/纵向项目-已完结/进行中
+        \item 介绍你在这个项目中的具体工作内容\dots\dots
+    \end{itemize}
+
+%     \vspace{0.5em}
+%     {\large \textbf{某某主题讨论班}}，主讲 / 参与 \hfill 2020年夏季
+%     \begin{itemize}
+%         \item \textbf{主要内容}：内容1，内容2，内容3\ 等。
+%     \end{itemize}
+
+%     \vspace{0.5em}
+%     {\large \textbf{课程名称}}，助教 \hfill 2021年夏季
+%     \begin{itemize}
+%         \item \textbf{主要内容}：内容1，内容2，内容3\ 等。
+%     \end{itemize}
+%     % 支教经历
+%     {\large \textbf{某地支教项目}} \hfill 2021年7月--2021年8月
+%     \begin{itemize}
+%     \item \textbf{角色}：支教老师 \hfill 志愿项目
+%     \item \textbf{内容}：为当地学生教授数学和英语课程，组织课外活动，提升学生的学习兴趣。
+%     \end{itemize}
+
+%     % 志愿服务
+%     {\large \textbf{某社区志愿服务}} \hfill 2020年3月--2020年5月
+%     \begin{itemize}
+%     \item \textbf{角色}：志愿者 \hfill 社区服务
+%     \item \textbf{内容}：协助社区防疫工作，分发物资，为居民提供生活帮助。
+% \end{itemize}
+    \vspace{1.2em}
+    \end{minipage}
+\newpage
+
+    %%%%%%%%%%%%%%%%%%%%
+    % 页眉、页脚和背景（如果有多页简历，请把页眉页脚和背景复制粘贴到第二页的内容之前）
+    %%%%%%%%%%%%%%%%%%%%
+
+    % 页眉：校标组合+学院名
+\begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north, inner sep=0pt](header) at (current page.north){
+        \includegraphics[width=\paperwidth]{images/header_sysu.png}
+    };
+    \node[anchor=west](school_logo) at (header.west){
+        \hspace{0.5cm}
+        \includegraphics[width=0.2\textwidth]{images/SYSU_smallwhitelogo.png}
+        };
+    \node[anchor=east](school_name) at(header.east){
+        \textcolor{white}{\textbf{\school}}
+        \hspace{0.5cm}
+    };
+\end{tikzpicture}
+\vspace{-3.5em}
+
+% 页脚，联系方式
+\begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=south, inner sep=0pt](footer) at (current page.south){
+        \includegraphics[width=\paperwidth]{images/footer_sysu.png}
+    };
+    % 联系方式
+    \node[anchor=center] at(footer.center){\contact};
+\end{tikzpicture}
+
+% 背景
+\begin{tikzpicture}[remember picture, overlay]
+    \node[opacity=0.05] at(current page.center){
+        \includegraphics[width=0.7\paperwidth, keepaspectratio]{images/SYSU_big_logo.png}
+    };
+\end{tikzpicture}
+% 如果每行的内容不是很多，可以考虑使用 minipage，将内容分列展示
+\begin{minipage}[t]{0.6\textwidth}
+        \section[技能特长]{\makebox[\iconwidth][c]{\color{SYSU_Green}{\faWrench}}\quad 技能特长}
+        \begin{itemize}
+        \setlength{\itemsep}{0.5em}
+            \item 熟练使用 Python、C++ 等编程语言。
+            \item 熟练使用 Tensorflow、Pytorch 等深度学习框架。
+            \item 熟悉 Windows 与 Linux 端开发。
+        \end{itemize}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.35\textwidth}
+        \section[兴趣爱好]{\makebox[\iconwidth][c]{\color{SYSU_Green}{\faStar}}\quad 兴趣爱好}
+        \begin{itemize}
+        \setlength{\itemsep}{0.5em}
+            \item SING
+            \item DANCE
+            \item Rap
+            \item BASKETBALL
+        \end{itemize}
+    \end{minipage}
+    
+    % \newpage
+    % % 如有需要，可以添加额外的页面。不要忘记添加页眉页脚和背景相关的代码。
+
+    % 竞赛经历
+    \section{\makebox[\widthof{\faTrophy}][c]{\color{SYSU_Green}{\faTrophy}}\quad 竞赛经历}
+    \begin{table}[h!]
+        \begin{tabularx}{\textwidth}{Xp{\widthof{第几负责人}}p{\widthof{国家级-第100名}}p{\widthof{2025年1月}}}
+            \textbf{比赛1} & 第一负责人 & 国家级-第10名 & 2023年4月 \\
+            \textbf{比赛2} & 个人参赛 & 国家级-一等奖 & 2023年8月\\
+            \textbf{比赛3} & 个人参赛 & 省级-一等奖 & 2022年12月\\
+            % 同理，可以自己加
+        \end{tabularx}
+    \end{table}
+
+    % % 技能特长
+    % \section{\makebox[\widthof{\faWrench}][c]{\color{SYSU_Green}{\faWrench}}\quad 技能特长}
+    % \begin{itemize}
+    %     \item 熟练使用C++ 、Python、Matlab编程语言。
+    %     \item 熟悉Windows与Linux端开发。
+    %     \item 熟练使用Tensorflow，Pytorch等深度学习框架。
+    %     \item 熟练使用Keil，Arduino IDE等集成开发软件。
+    %     \item 了解模式识别，强化学习，遗传算法，知识蒸馏等相关概念。
+    % \end{itemize}
+
+% 所获荣誉
+\section{\makebox[\widthof{\faStar}][c]{\color{SYSU_Green}{\faStar}}\quad 所获荣誉}
+\begin{minipage}[t]{0.48\textwidth}
+    \begin{itemize}
+        \item 某年学业先进个人
+        \item 某年某奖学金某等奖
+        \item 某年优秀团员称号
+    \end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+    \begin{itemize}
+        \item 某大使
+        \item 某年某奖学金某等奖
+        \item 某年某称号
+    \end{itemize}
+\end{minipage}
+
+    % 其他
+    \section{\makebox[\widthof{\faInfo}][c]{\color{SYSU_Green}{\faInfo}}\quad 其他}
+    \begin{itemize}
+        \item 英语水平-CET6/雅思/TOEFL xxx分
+        \item xx几级证书
+        \item 技术博客: 某网址
+        \item 教师资格证：xxx
+        \item 普通话证书：几级几等
+        \item 文字排版：\LaTeX
+    \end{itemize}
+
+\end{document}
